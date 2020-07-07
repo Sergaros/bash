@@ -1,0 +1,105 @@
+$, %    - simple user
+#       - root user
+
+// user profile
+nano ~/.bash_profile
+
+// Simple comands
+date    - show current date
+cal     - show calendar
+df      - display free disk space
+free    - display free RAM space (linux only)
+reset   - reset terminal state
+exit    - end of seans
+
+// Navigation
+pwd - show current directory
+cd  - move to another directory
+    (cd -)  - change directory to previous
+    (cd ~)  - go to user directory
+ls  - show directory content
+    -a  -   show hidden directories/files
+
+// Work with files
+file    - determine file type
+less    - show file content. Use 'space' and 'b' for navigation and 'q' for exit.
+zless   - show zip-file content.
+// system directories
+/root   - Домашний каталог пользователя root
+/sbin   - Каталог содержит системные двоичные файлы (system binaries). Эти программы выполняют жизненно важные задачи и обычно запускаются только суперпользователем
+/tmp    - Каталог /tmp играет роль временного хранилища для временных файлов, создаваемых разными программами.
+/usr    - В нем хранятся все программы и файлы поддержки, используемые обычными пользователями
+/usr/bin    - Каталог /usr/bin содержит выполняемые программы, установленные дис- трибутивом Linux.
+/usr/lib    - Содержит разделяемые библиотеки для программ в /usr/bin
+/usr/local  - Дерево каталогов /usr/local используется для установки тех программ, которые не входят в состав дистрибутива, но должны быть доступны всем пользователям в системе.
+/usr/sbin   - Содержит дополнительные программы для администрирования.
+/usr/share  - Каталог /usr/share содержит все разделяемые данные, используемые программами в /usr/bin, в том числе конфигурационные файлы с настрой- ками по умолчанию, ярлыки, фоновые изображения для рабочего стола, звуковые файлы и т. д
+/usr/share/doc  - документация установленых пакетов, организованная по пакетам, хранится в ката- логе /usr/share/doc
+/var    - тут хранятся часто изменяемые данные: различные базы данных, буферные файлы, почта пользователей и пр.
+/var/log    - Каталог /var/log содержит файлы журналов с записями о различных действиях, выполнявшихся в системе. Они очень важны и должны про- веряться время от времени. Наиболее полезными являются файлы /var/ log/messages и /var/log/syslog. 
+
+
+// Operations with files and directories
+
+// globbing and wildcards
+*   - Любая последовательность любых символов
+?   - Любой один символ
+[символы]   - Любой один символ из указанного множества символов
+[!символы]  - Любой один символ, не принадлежащий указанному множеству символов
+[[:класс:]] - Любой один символ, принадлежащий указанному классу
+
+// symbol classes
+[:alnum:]   - Любой алфавитно-цифровой символ
+[:alpha:]   - Любой алфавитный символ
+[:digit:]   - Любой цифровой символ
+[:lower:]   - Любая буква в нижнем регистре
+[:upper:]   - Любая буква в верхнем регистре
+
+// Examples
+*                       - Все имена файлов
+g*                      - Все имена файлов, начинающиеся с символа «g»
+b*.txt                  - Все имена файлов, начинающиеся с символа «b», за кото- рым следует любое число других символов, и заканчивающиеся на «.txt»
+Data???                 - Все имена файлов, начинающиеся с символов «Data», за которыми следуют ровно три любых символа
+[abc]*                  - Все имена файлов, начинающиеся с символа «a», «b» или «c»
+BACKUP.[0-9][0-9][0-9]  - Все имена файлов, начинающиеся с символов «BACKUP.», за которыми следуют ровно три цифровых символа
+[[:upper:]]*            - Все имена файлов, начинающиеся с буквы в верхнем регистре
+[![:digit:]]*           - Все имена файлов, не начинающиеся с цифры
+*[[:lower:]123]         - Все имена файлов, заканчивающиеся буквой в нижнем регистре или цифрой «1», «2» или «3»
+
+// Base commands
+
+mkdir   - create directories
+    mkdir dir1
+    mkdir dir1 dir2 dir3
+
+cp  - copy files/directories
+    cp item1 item2 // copy item1 to item2
+    cp item1 item2 dir1 // copy items item1 and item2 to directory dir1, dir1 must be exist
+    cp dir1/* dir2 // copy content of dir1 to dir2, dir 2 must be exist
+    cp -r dir1 dir2 // copy content dir1 to dir2
+
+mv - move files/directories
+    mv item1 item2 // move or rename item1 to item2
+    mv item1 dir1 // move item1 to dir1
+    mv dir1/* dir2 // move all files from dir1 to dir2
+    mv dir1 dir2 // rename dir1 to dir2
+
+rm - remove files/directories
+    rm item1 // remove item1
+    rm -r item1 item2 dir1 // remove item1 item2 and dir1 with all content
+    rm -rf dir1 // remove dir1 with all content and without warnings
+
+ln - make links
+    ln file1 link1 // make hard link
+    ln -s file1 link1 // make symbol link
+
+    Hard Link   -
+    Жесткая ссылка не может указывать на файл за пределами собственной фай- ловой системы. Это означает, что ссылка не может указывать на файл, находя- щийся в другом разделе диска.
+    Жесткая ссылка не может указывать на каталог.
+    Жесткая ссылка неотличима от самого файла.
+    При удалении жесткой ссылки удаляется только сама ссылка, а файл остается на месте (то есть пространство, занимаемое файлом, не освобождается).
+
+    Symbol Link -
+    Символические ссылки были придуманы с целью преодолеть ограничения жест- ких ссылок. Когда создается символическая ссылка, в действительности создается файл особого типа, содержащий текстовый указатель на файл или каталог.
+    При удалении символической ссылки удаляется только символиче- ская ссылка, но не файл.
+    Если удалить файл до того, как будет удалена символи- ческая ссылка, ссылка останется на месте, но будет указывать в никуда.
